@@ -1,6 +1,4 @@
--- mysql - SCOTT/TIGER 
-
--- 9.integrity.sql
+9.integrity.sql
 -- DB 자체적으로 강제적인 제약 사항 설정
 
 /*
@@ -56,10 +54,6 @@ CREATE TABLE table_name (
 		alter table 테이블명 alter 컬럼명 drop 제약조건;
 		
 */
-
-use playdata;
-
-
 -- 1. table 삭제
 drop table if exists emp01;
 
@@ -354,7 +348,7 @@ insert into emp05 values(2, 'master', -10); -- error
 select * from emp05;
 
 
--- ? age값이 1~100까지만 DB에 저장
+-- age값이 1~100까지만 DB에 저장
 drop table if exists emp05;
 
 create table emp05(

@@ -52,26 +52,3 @@ select * from dept;
 
 update dept set dname='SALES' where dname = '영업';
 select  * from dept;
-
-
-
-
-
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-

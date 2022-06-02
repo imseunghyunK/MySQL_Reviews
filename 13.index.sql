@@ -31,5 +31,3 @@ desc emp01;
 
 -- drop index
 alter table emp01 drop index idx_emp01_empno;
-
- 

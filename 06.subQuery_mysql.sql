@@ -12,7 +12,6 @@ syntax
 -- 문법 : 비교 연산자(대소비교, 동등비교) 오른쪽에 () 안에 select문 작성 
 -- : create 및 insert 에도 사용 가능
 
-use playdata;
 
 -- 1. SMITH라는 직원 부서명 검색
 

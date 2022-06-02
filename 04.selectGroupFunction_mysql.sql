@@ -1,10 +1,8 @@
--- mysql
--- admin/playdata
-
 -- 4.selectGroupFunction.sql
 -- 그룹함수란? 다수의 행 데이터를 한번에 처리
 -- 장점 : 함수 연산시 null 데이터를 함수 내부적으로 사전에 고려해서 null값 보유한 field는 함수 로직 연산시 제외,
 -- 		 sql 문장 작업 용이
+
 /*
 1. count() : 개수 확인 함수
 2. sum() : 합계 함수
@@ -24,8 +22,6 @@
 4. having 절 : 그룹함수 사용시 조건절
 5. order by절 : 검색된 데이터를 정렬
 */
-  
-use playdata;
 
 -- 1. count() : 개수 확인 함수
 -- emp table의 직원이 몇명?
@@ -35,7 +31,7 @@ select count(*) from emp;
 -- 14명의 row값으로 14개의 결과값 즉 row별 1:1로 검색 단일행 함수
 select ename, length(ename) from emp;
 
--- ? comm 받는 직원 수만 검색
+-- comm 받는 직원 수만 검색
 select job, comm from emp;
 
 -- null 데이터를 보유한 row는 에러가 아니라 그룹함수에서 필터링
@@ -46,17 +42,17 @@ select ename, count(comm) from emp; -- 4
 select ename from emp;
 
 -- 2. sum() : 합계 함수
--- ? 모든 사원의 월급여(sal)의 합
+-- 모든 사원의 월급여(sal)의 합
 select sal from emp;
 select sum(sal) from emp;
 
--- ? 모든 직원이 받는 comm 합
+-- 모든 직원이 받는 comm 합
 select sum(comm) from emp;
 
--- ?  MANAGER인 직원들의  월급여의 합 
+--  MANAGER인 직원들의  월급여의 합 
 select sum(sal) from emp where job = 'MANAGER';
 
--- ? job 종류 counting[절대 중복 불가 = distinct]
+-- job 종류 counting[절대 중복 불가 = distinct]
 -- 데이터 job 확인
 select job from emp;
 select distinct job from emp;
@@ -64,11 +60,11 @@ select count(distinct job) from emp;
 
 
 -- 3. avg() : 평균
--- ? emp table의 모든 직원들의 급여(sal) 평균 검색
+-- emp table의 모든 직원들의 급여(sal) 평균 검색
 select avg(sal) from emp; 
 
 
--- ? 커미션 받는 사원수(count()), 총 커미션 합(sum()), 커미션 평균(avg()) 구하기
+-- 커미션 받는 사원수(count()), 총 커미션 합(sum()), 커미션 평균(avg()) 구하기
 select count(comm), sum(comm), avg(comm) from emp e; 
 
 -- 4. max(), min() : 최대값, 최소값
@@ -116,18 +112,18 @@ from emp e
 group by deptno
 order by deptno desc;
 
--- ? 부서별(group by deptno) (월급여) 평균 구함(avg())(그룹함수 사용시 부서 번호별로 그룹화 작업후 평균 연산)
+-- 부서별(group by deptno) (월급여) 평균 구함(avg())(그룹함수 사용시 부서 번호별로 그룹화 작업후 평균 연산)
 select deptno, avg(sal)
 from emp e 
 group by deptno ;
 
--- ? 소속 부서별 급여 총액과 평균 급여 검색[deptno 오름차순 정렬]
+-- 소속 부서별 급여 총액과 평균 급여 검색[deptno 오름차순 정렬]
 select deptno, sum(sal), avg(sal)
 from emp e 
 group by deptno 
 order by deptno desc;
 
--- ? 소속 부서별 최대 급여와 최소 급여 검색[deptno 오름차순 정렬]
+-- 소속 부서별 최대 급여와 최소 급여 검색[deptno 오름차순 정렬]
 -- 컬럼명 별칭에 여백 포함한 문구를 사용하기 위해서는 쌍따옴표로만 처리
 select deptno as 부서, max(sal) as "최대 급여", min(sal) as "최소 급여"
 from emp e 
@@ -138,14 +134,14 @@ order by deptno desc;
 -- *** having절 *** [ 조건을 주고 검색하기 ]
 -- 그룹함수 사용시 조건문
 
--- 1. ? 부서별(group by) 사원의 수(count(*))와 커미션(count(comm)) 받는 사원의 수
+-- 1. 부서별(group by) 사원의 수(count(*))와 커미션(count(comm)) 받는 사원의 수
 -- 집계(그룹) 함수는 null은 자동 제거
 select deptno, count(*), count(comm)
 from emp e
 group by deptno;
 
 -- 조건 추가
--- 2. ? 부서별 그룹을 지은후(group by deptno), 
+-- 2. 부서별 그룹을 지은후(group by deptno), 
 -- 부서별(deptno) 평균 급여(avg())가 2000 이상(>=)부서의 번호와 평균 급여 검색 
 select deptno, count(*), count(comm), avg(sal) 
 from emp e

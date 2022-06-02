@@ -16,8 +16,6 @@
       2. 집계(다중행, 그룹) 함수 - 입력한 행수와 달리 결과값 하나만 반환 
 */
 
-use playdata;
-
 -- 단일행 함수 : 입력 데이터 수만큼 출력 데이터
 /* Mysql Db 자체적인 지원 함수 다수 존재
 1. 숫자 함수 MySQL Numeric Functions
@@ -102,7 +100,7 @@ select ename from emp;
 select lower(ename) from emp; -- 원본 table의 데이터는 여전히 대문자, 단 검색 시 소문자로 변환해서 제공
 
 
--- 2. ? manager로 job 칼럼과 뜻이 일치되는 사원의 사원명 검색하기 
+-- 2. manager로 job 칼럼과 뜻이 일치되는 사원의 사원명 검색하기 
 -- mysql은 데이터값의 대소문자 구분없이 검색 가능
 -- 해결책 1 : binary()  대소문자 구분을 위한 함수
 -- 해결책 2 : alter 명령어로 처리
@@ -126,7 +124,7 @@ select length('a'), length('가');
 
 select substr('abcdef', 2, 2); --bc 
 
--- 5. ? 년도 구분없이 2월에 입사한 사원(mm = 02)이름, 입사일 검색
+-- 5. 년도 구분없이 2월에 입사한 사원(mm = 02)이름, 입사일 검색
 -- date 타입에도 substr() 함수 사용 가능
 -- 문자열 index 시작 - 1 
 select hiredate from emp; -- 1980-12-17 yyyy-mm-dd
@@ -198,7 +196,7 @@ select curdate()-hiredate from emp where ename = 'SMITH'; -- 419309
 select '20220526'- '20220501' from emp where ename = 'SMITH'; -- 419309
 
 
--- ? 교육시작 경과일수
+-- 교육시작 경과일수
 -- 순수 문자열을 날짜 형식으로 변환해서 검색
 /* 
 	yy/mm/dd 포멧으로 연산시에는 반드시 to_date() 라는 날짜 포멧으로
@@ -234,7 +232,7 @@ select adddate(now(), interval 10 day) -- 2022-06-05 15:06:54
 select adddate(now(), interval 15 minute) -- 2022-05-26 15:22:35
 
 
--- 4. ? emp table에서 입사일 이후 3개월 지난 일자 검색
+-- 4. emp table에서 입사일 이후 3개월 지난 일자 검색
 select ename, hiredate as 입사일, adddate(hiredate, interval 3 month) as 입사후3개월 from emp e; 
 
 -- 5. 두 날짜 사이의 개월수 검색 : months_between()
@@ -274,7 +272,7 @@ select last_day(now());
 
 
 
--- 8.? 2020년 2월의 마지막 날짜는?
+-- 8. 2020년 2월의 마지막 날짜는?
 select last_day('2020-02-02');
 
 

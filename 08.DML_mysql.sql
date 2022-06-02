@@ -1,6 +1,3 @@
--- mysql 일반 user SCOTT/TIGER
--- 실습시에 dbeaver의 auto commit 기능 무효화 한 후에 수작업으로 tx 수행
-
 -- 08.DML.sql
 /* 
 - DML : Data Mainpulation Language
@@ -31,7 +28,6 @@
 3. delete
 */
 
-use playdata;
 
 -- *** insert ****
 -- 1. 칼럼명 기술없이 데이터 입력
@@ -116,7 +112,7 @@ update emp01 set deptno=50 where deptno=10;
 select * from emp01;
 commit;
 
--- 2. ? emp01 table의 모든 사원의 급여를 10%(sal*1.1) 인상하기
+-- 2.  emp01 table의 모든 사원의 급여를 10%(sal*1.1) 인상하기
 -- ? emp table로 부터 empno, sal, hiredate, ename 순으로 table 생성
 desc emp01;
 drop table if exists emp01;
@@ -148,7 +144,7 @@ update emp01 set sal=sal*1.1 where sal >= 3000;
 select sal from emp01;
 commit;
 
--- 5. ?emp01 table 사원의 급여가 1000이상인 사원들의 급여만 500원씩 삭감 
+-- 5. emp01 table 사원의 급여가 1000이상인 사원들의 급여만 500원씩 삭감 
 -- insert/update/delete 문장에 한해서만 commit과 rollback 영향을 받음
 select sal from emp01;
 

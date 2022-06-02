@@ -1,5 +1,4 @@
 -- 14.partition.sql
--- https://dev.mysql.com/doc/refman/8.0/en/partitioning.html
 /*
  * 1. 기능
  * 	- 논리적으로 하나의 table 이나 물리적으로 여러 개의 table로 분리해서 관리하는 기술
@@ -29,10 +28,6 @@
 */
 
 -- test data의 기준 년도
-
-use playdata;
-
-
 drop table emp00;
 
 /* 년도를 기준으로 하나의 table을 마치 물리적으로 다수의 table이 있는 것처럼 table 생성
@@ -203,9 +198,3 @@ CREATE TABLE emp00 (
 	partition m10 values less than (12),   -- 11 까지는 의미 
 	partition m11 values less than maxvalue  -- 11까지의 데이터는 m10으로 설정 후 그 이후의 모든 데이터 12는 maxvalue 필수
  );
-
-
-
-
-
-

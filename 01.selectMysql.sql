@@ -1,11 +1,4 @@
-/* 주의 사항
- * 1. 단일 line 주석 작성시 -- 와 내용 사이에 blank 필수
- * 
- * 2. DBeaver 접속 문제 발생시 해결책
- * 	userSSL false / allowPublicKeyRetrieval true 속성 추가 
- * 	https://earth-95.tistory.com/52
- * ----------------------------------
- * 문법 1 - 검색의 기본 문장
+/* 문법 1 - 검색의 기본 문장
  * select절
  * from 절
  * 
@@ -21,9 +14,6 @@
  * 
  * 	
  */
-
--- mysql
--- id/pw - admin/playdata
 
 -- database에 접속
 use playdata;
@@ -65,21 +55,21 @@ SELECT DISTINCT deptno from emp order by deptno desc;
 SELECT DISTINCT deptno from emp order by deptno asc;
 
 
--- 10. ? 사번(empno)과 이름(ename) 검색 단 사번은 내림차순(order by desc) 정렬
+-- 10. 사번(empno)과 이름(ename) 검색 단 사번은 내림차순(order by desc) 정렬
 select empno, ename from emp order by empno desc;
 
--- 11. ? dept table의 deptno 값만 검색 단 오름차순(asc)으로 검색
+-- 11. dept table의 deptno 값만 검색 단 오름차순(asc)으로 검색
 select * from dept;
 SELECT deptno from dept order by deptno asc;
 
--- 12. ? 입사일(hiredate) 검색, 
+-- 12. 입사일(hiredate) 검색, 
 -- 입사일이 오래된 직원부터 검색되게 해 주세요
 -- 고려사항 : date 타입도 정렬(order by) 가능 여부 확인
 select hiredate from emp;
 
 select hiredate from emp order by hiredate asc;
 
--- 13. ?모든 사원의 이름과 월 급여(sal)와 연봉 검색
+-- 13. 모든 사원의 이름과 월 급여(sal)와 연봉 검색
 SELECT ename, sal, sal from emp;
 SELECT ename, sal, sal*12 from emp;
 SELECT ename, comm, sal, sal*12 from emp;
@@ -90,7 +80,7 @@ SELECT ename, comm, sal*12+comm from emp;
 -- null 연산 재확인
 SELECT sal, comm, sal+comm from emp;
 
--- 14. ?모든 사원의 이름과 월급여(sal)와 연봉(sal*12) 검색
+-- 14. 모든 사원의 이름과 월급여(sal)와 연봉(sal*12) 검색
 -- 해결책 : comm이 null인 사원은 즉 0으로 치환 후에 연산
 -- 모든 db는 지원하는 내장 함수 
 -- null -> 숫자값으로 대체하는 함수 : IFNULL(null보유컬럼명, 대체값)
@@ -118,7 +108,7 @@ SELECT ename, comm
 FROM emp 
 WHERE comm is not null;
 
--- 17. ? 사원명이 스미스인 사원의 이름과 사번만 검색
+-- 17. 사원명이 스미스인 사원의 이름과 사번만 검색
 -- 사원명(ename) 스미스(SMITH)인 사원의 이름(ename)과 사번(empno)만 검색
 -- ename은 SMITH 여야만 함
 -- 동등비교 연산자 : =
@@ -133,12 +123,12 @@ SELECT ename, empno from emp where ename='SMITH';
 -- 단, 사번은 내림차순 검색
 SELECT ename, empno, deptno from emp where deptno = 10 order by empno desc;
 
--- 19. ? 기본 syntax를 기반으로 
+-- 19. 기본 syntax를 기반으로 
 -- emp  table 사용하면서 문제 만들기
 -- ? 부서 번호가 20번 부서의 직원들 이름, 사번, 부서번호, 월급, 연봉 검색
 select ename, empno, sal, sal*12, deptno from emp where deptno = 20; 
 
--- ? 사원명, 사번, 부서번호, 연봉 검색 단 연봉은 내림차순 검색
+-- 사원명, 사번, 부서번호, 연봉 검색 단 연봉은 내림차순 검색
 SELECT ename, empno, deptno, sal*12 as 연봉 from emp order by 연봉 desc;
 
 -- 20. 급여가 900이상인(sal >= 900) 사원들 이름, 사번, 월 급여 검색 
@@ -154,6 +144,7 @@ where sal >= 900;
  * 해결점 2 : sql문장 실행시 binary()함수를 적용
  * 
  */
+
 -- 21. deptno 10, job 은 manager(대문자로) 이름, 사번, deptno, job 검색
 select job from emp;
 
@@ -219,7 +210,7 @@ select ename, sal
 from emp
 where sal <= 2000 or sal >= 3000;
 
--- 24.  comm이 300 or 500 or 1400인
+-- 24. comm이 300 or 500 or 1400인
 -- in 연산식 사용해서 좀더 개선된 코드
 SELECT comm from emp;
 
@@ -232,7 +223,7 @@ from emp
 where comm in (300,500,1400);
 
 
--- 25. ?  comm이 300 or 500 or 1400이 아닌 사원명 검색
+-- 25. comm이 300 or 500 or 1400이 아닌 사원명 검색
 -- not in ()
 select ename, comm
 from emp 

@@ -1,5 +1,5 @@
 -- 12.autoincrement.sql
--- mysql SCOTT/TIGER
+
 /*
 1. 개요
 	- 새 데이터 저장시 고유 번호가 자동 생성 및 적용하게 하는 기술
@@ -18,10 +18,7 @@
 	- 시작 값을 100으로 하려 할 경우
 		- alter table table명 auto_increment = 100;
 	
-*/	
-	     
-
-use playdata;
+*/
 
 -- 1. 사번에 적용. 1씩 증가
 
@@ -47,5 +44,3 @@ alter table emp01 auto_increment = 100;
 
 insert into emp01 (ename) values ('연아');
 select * from emp01; 
-
-

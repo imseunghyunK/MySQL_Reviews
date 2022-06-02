@@ -1,4 +1,3 @@
--- mysql SCOTT/TIGER
 /*
 1. table의 각 컬럼들 분석
 CREATE TABLE titanic_raw
@@ -218,7 +217,7 @@ select age, count(*) from titanic group by age order by 1 desc;
 
 select * from titanic;
               
--- ? 연령대별 생존자 수와 사망자 수 조회
+-- 연령대별 생존자 수와 사망자 수 조회
 -- 10대 이하 :  age between 0 and 9     1.10대이하
 -- 각 연령대별 : case when   then
 
@@ -293,8 +292,8 @@ select case when age between  0 and  9 then '1.10대이하'
  order by 1, 2, 3 asc;
 
 
--- ? 객실 등급별 어떤 등급의 사람들이 가장 많이 사망했는지 알아내기 위한 본인만의 sql문장 만들어 보기 
--- ? 객실 등급별(pclass, group by) 어떤 등급의 사람들이 가장 많이 사망(survived='사망')했는지 알아내기 위한 본인만의 sql문장 만들어 보기 
+-- 객실 등급별 어떤 등급의 사람들이 가장 많이 사망했는지 알아내기 위한 본인만의 sql문장 만들어 보기 
+-- 객실 등급별(pclass, group by) 어떤 등급의 사람들이 가장 많이 사망(survived='사망')했는지 알아내기 위한 본인만의 sql문장 만들어 보기 
 -- sql 문장
 
 select age, count(*) as 인원수 from titanic 
@@ -306,26 +305,3 @@ from titanic
 where survived = '사망'
 group by pclass
 order by 3 desc;
-
--- 유상민 작품
-SELECT pclass as 객실등급, survived as 생존여부, COUNT(*) as '사망자 수'
-from titanic WHERE survived = '사망'
-group by pclass, survived
-ORDER by survived asc LIMIT 1;
-
-
--- 신재훈 작품
--- 기존 방식으로 검색 후에 그렇다면??? 혹시 3등급 pclass에 가장 많은 사람이 탑승?
--- 비율 등이 필요, 총인원수 및 사망률 검색
-select
-	case pclass
-		when 1 then ' 1등석 '
-		when 2 then ' 2등석 '
-		else 		' 3등석 '
-	end '객실등급',
-	count(pclass) '총 인원수', 
-	count(case when survived = '사망' then 1 end)as '사망자 수',
-	(count(case when survived = '사망' then 1 end)/count(pclass))*100 as '사망율 (%)'
-from titanic
-group by 1
-order by 1;
